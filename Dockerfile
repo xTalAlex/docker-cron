@@ -6,12 +6,18 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && which cron \
     && rm -rf /etc/cron.*/*
-
+    && install supervisor
+    
 COPY crontab /hello-cron
 COPY entrypoint.sh /entrypoint.sh
+COPY laravel-worker.conf /etc/supervisor/conf.d/laravel-worker.conf
 
 RUN crontab hello-cron
 RUN chmod +x entrypoint.sh
+
+RUN supervisorctl reread
+RUN supervisorctl update
+RUN supervisorctl start "laravel-worker:*"
 
 ENTRYPOINT ["/entrypoint.sh"]
 
