@@ -7,6 +7,7 @@ RUN apt-get update \
     && which cron \
     && rm -rf /etc/cron.*/*
     && install supervisor
+    && install beanstalkd
     
 COPY crontab /hello-cron
 COPY entrypoint.sh /entrypoint.sh
