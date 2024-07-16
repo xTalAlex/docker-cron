@@ -19,6 +19,7 @@ RUN chmod +x entrypoint.sh
 # RUN supervisorctl reread
 # RUN supervisorctl update
 # RUN supervisorctl start "laravel-worker:*"
+RUN service beanstalkd start
 
 ENTRYPOINT ["/entrypoint.sh"]
 
