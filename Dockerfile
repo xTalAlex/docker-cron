@@ -16,11 +16,6 @@ COPY entrypoint.sh /entrypoint.sh
 RUN crontab hello-cron
 RUN chmod +x entrypoint.sh
 
-# RUN supervisorctl reread
-# RUN supervisorctl update
-# RUN supervisorctl start "laravel-worker:*"
-RUN service beanstalkd start
-
 ENTRYPOINT ["/entrypoint.sh"]
 
 # https://manpages.ubuntu.com/manpages/trusty/man8/cron.8.html
